@@ -6,46 +6,50 @@
 
 import org.gicentre.geomap.*;
  
-//GeoMap geoMap;
-GeoMap geoMap;
+ GeoMap geoMap; 
+
 DataTable buildTable;
+Menu optionMenu;
+
+CirclesGraph AgeGraph;
+
+wcMap worldCMap;
 
 Table table1, table2;
 int[] scoresHOU = new int[12];
 int[] scoresOPP = new int[12];
+String[] labels = new String[4];
+color[] btncolors = new color[4];
+ 
  
 void setup(){
   size(1000, 1000);
    
-  //geoMap = new GeoMap(this);  // Create the geoMap object.
-  geoMap = new GeoMap(10,10,350,225,this); 
+  geoMap = new GeoMap(this);  // Create the geoMap object.
+ // geoMap = new GeoMap(10,10,350,225,this);
+  labels[0] = "ONE";
+  labels[1] = "TWO";
+  labels[2] = "THREE";
+  labels[3] = "FOUR";
+  btncolors[0] = color(#19C1BD);  // brackground
+  btncolors[1] = color(0);  // label
+  btncolors[2] = color(#D5F5F4);  // mouseover
+  btncolors[3] = color(#109D0E);  // selected
+  
   buildTable = new DataTable();
-  geoMap.readFile("world");   // Read shapefile.
-  table1 = loadTable("scores01.csv", "header");
-  background(202, 226, 245);  // Ocean colour
-   stroke(0,40);               // Boundary colour
-   fill(206,173,146); 
-   geoMap.draw();  
-  buildTable.drawTable(700,560, table1);
+  worldCMap = new wcMap(geoMap);
+     
+  worldCMap.display();   
+optionMenu = new Menu(50,300, labels, 30, 50, btncolors);
+ // buildTable.drawTable(700,560, table1);
+  optionMenu.create(50, 300, false);
+  
+  AgeGraph = new CirclesGraph();
+  AgeGraph.loadData("SquadsGroupAge.csv");
+  AgeGraph.displayAll(5,700, color(#CDFACC), color(#2B8BDE));
 }
 
 void draw(){
      
 }
  
-void draw123(){
-  background(202, 226, 245);  // Ocean colour
-  stroke(0,40);               // Boundary colour
-  fill(206,173,146);          // Land colour
-  
-  geoMap.draw();              // Draw the entire map.
-  
-   
-  // Find the country at mouse position and draw in different colour.
-  int id = geoMap.getID(mouseX, mouseY);
-  if (id != -1)
-  {
-    fill(180, 120, 120);      // Highlighted land colour.
-    geoMap.draw(id);
-  }
-}
