@@ -6,25 +6,27 @@
 
 import org.gicentre.geomap.*;
  
- GeoMap geoMap; 
+GeoMap geoMap; 
 
 DataTable buildTable;
 Menu optionMenu;
 
 CirclesGraph AgeGraph;
+PImage header; 
 
-wcMap worldCMap;
+//wcMap worldCMap;
 
 Table table1, table2;
-int[] scoresHOU = new int[12];
-int[] scoresOPP = new int[12];
 String[] labels = new String[4];
 color[] btncolors = new color[4];
  
  
 void setup(){
   size(1000, 1000);
-   
+  background(0);
+  header = loadImage("longfifa.jpg");  //for background
+  
+  image(header,width/2-header.width/2,0);
   geoMap = new GeoMap(this);  // Create the geoMap object.
  // geoMap = new GeoMap(10,10,350,225,this);
   labels[0] = "ONE";
@@ -37,19 +39,20 @@ void setup(){
   btncolors[3] = color(#109D0E);  // selected
   
   buildTable = new DataTable();
-  worldCMap = new wcMap(geoMap);
+ // wcMap(0, 60, "Country_rounds.csv", 600, 300);
      
-  worldCMap.display();   
-optionMenu = new Menu(50,300, labels, 30, 50, btncolors);
+ // worldCMap.display();   
+optionMenu = new Menu(10,380, labels, 30, 50, btncolors);
  // buildTable.drawTable(700,560, table1);
-  optionMenu.create(50, 300, false);
+  optionMenu.create(10, 380, true);
   
   AgeGraph = new CirclesGraph();
   AgeGraph.loadData("SquadsGroupAge.csv");
-  AgeGraph.displayAll(5,700, color(#CDFACC), color(#2B8BDE));
+  AgeGraph.displayAll(5,500, color(#CDFACC), color(#2B8BDE));
 }
 
 void draw(){
+  wcMap(0, 60, "Country_rounds.csv", 600, 300);
      
 }
  

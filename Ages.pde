@@ -34,7 +34,7 @@ class Bubble {
       fill(0);
       textAlign(CENTER, CENTER);
       text(diameter,x,y);
-      text(name,x,y+62);
+      text(name,x,y+55);
     }
   }
 }
@@ -79,15 +79,17 @@ class CirclesGraph {
   
   void displayAll(int xval, int yval, color backColor, color circleColor) {
     fill(color(backColor));
-    rect (xval, yval, width-xval*2,150); 
-    xval = xval+bubbles[0].diameter/2 +10;
+    rect (xval, yval-50, width-xval*2,150); 
+    xval = xval+bubbles[0].diameter/2 +40;
     yval = yval+bubbles[0].diameter/2 +10;
     for (int i = 0; i < bubbles.length; i++) {
       bubbles[i].display(xval, yval, circleColor);
-      xval = xval+ int(bubbles[i].diameter)+8;      
+      if (i < bubbles.length-1) {
+        xval = xval+int(bubbles[i].diameter/2)+int(bubbles[i+1].diameter/2);
+      }
     }
     textAlign(CENTER, CENTER);
     fill(0);
-    text(dataTable.getColumnTitle(0),20,yval+62); 
+    text(dataTable.getColumnTitle(0),20,yval+55); 
   } 
 }
