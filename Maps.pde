@@ -46,7 +46,7 @@ void wcMap(int xpos, int ypos, String file_name, int sizew, int sizeh) {
   // Draw title text
   fill(0);
   textAlign(LEFT, TOP);
-  text("Countries participation in World Cuo Russia 2018", 10, sizeh+ypos-15);
+  text("Countries participation in World Cup Russia 2018", xpos+10, sizeh+ypos-15);
   
   // Query the country at the mouse position.
   int id = geoMap.getID(mouseX, mouseY);
