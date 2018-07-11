@@ -5,7 +5,7 @@ class Menu {
   color[] ctrcolors;
   float ctrh, ctrw;
   Button[] controls;
-  
+  int keeper;
   
   Menu(){
   }
@@ -61,21 +61,61 @@ class Menu {
         controls[i].display();
       }
     }
-    fill(0);
+    fill(255);
     switch(optionSelected) {
-          case ("GRAPHIC 1"):
+          case ("AGES"):
             AgeGraph.loadData("SquadsGroupAge.csv");
-            AgeGraph.displayAll(70,600, color(#CDFACC), color(#2B8BDE));
+            //AgeGraph.displayAll(70,600, color(#CDFACC), color(#2B8BDE));
+            AgeGraph.displayAll(70,600, color(#BB0104, 70), color(#2B8BDE));
+            keeper = 1;
             break;
-          case ("GRAPHIC 2"):
-            rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
+          case ("GOALS"):
+            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
+            drawGoalTime();
+            keeper = 2;
             break;
-          case ("GRAPHIC 3"):
-            rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
+          case ("MARKET"):
+            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
+            marketValue.mvDraw(cName, barData);
+            keeper = 3;
             break;
-            
+          case ("CARDS"):
+            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh);
+            lineCount = 0;
+            cardsDrawn = 0;
+            card.cardDraw(205, 4, 20, 40, 38);
+            keeper = 4;
           default:
+            keeper = 1;
             fill(0);
-    }
-  }  
+    }    
+  }
+  void keepButton(){
+    switch(keeper) {
+          case (1):
+            AgeGraph.loadData("SquadsGroupAge.csv");
+            AgeGraph.displayAll(70,600, color(#BB0104, 70), color(#2B8BDE));
+            keeper = 1;
+            break;
+          case (2):
+            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
+            drawGoalTime();
+            keeper = 2;
+            break;
+          case (3):
+            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
+            marketValue.mvDraw(cName, barData);
+            keeper = 3;
+            break;
+          case (4):
+            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh);
+            lineCount = 0;
+            cardsDrawn = 0;
+            card.cardDraw(205, 4, 20, 40, 38);
+            keeper = 4;
+          default:
+            keeper = 1;
+            fill(0);
+    }        
+  }
 }
