@@ -1,45 +1,5 @@
-class Bubble {
-  float x, y;
-  int diameter;
-  String name;
-  color circleColor;
-  boolean over = false;
-  
-  Bubble(){
-  }
-
-  Bubble(int diameter, String name) {
-    this.diameter = diameter;
-    this.name = name;    
-  }
- 
-  Bubble(int diameter, String name, color circleColor) {
-    this.diameter = diameter;
-    this.name = name;
-    this.circleColor = circleColor;
-  }
-  
-  // Display the Bubble
-  void display(int xpos, int ypos, color circleColor) {
-    stroke(0);
-    strokeWeight(2);
-    noFill();
-    x = xpos;
-    y = ypos;
-    
-    fill(color(circleColor));
-    noStroke();
-    ellipse(x, y, diameter, diameter);
-    if (diameter > 10) {
-      fill(0);
-      textAlign(CENTER, CENTER);
-      text(diameter,x,y);
-      text(name,x,y+55);
-    }
-  }
-}
-
-
+// Build a circle graph 
+// this is used for players age graph
 class CirclesGraph {
   Bubble[] bubbles;
   // A Table object
@@ -78,9 +38,10 @@ class CirclesGraph {
   }
   
   void displayAll(int xval, int yval, color backColor, color circleColor) {
+    int initx = xval;
     fill(color(backColor));
     rect (xval, yval-50, width-xval*2,150); 
-    xval = xval+bubbles[0].diameter/2 +40;
+    xval = xval+bubbles[0].diameter/2 +60;
     yval = yval+bubbles[0].diameter/2 +10;
     for (int i = 0; i < bubbles.length; i++) {
       bubbles[i].display(xval, yval, circleColor);
@@ -90,6 +51,6 @@ class CirclesGraph {
     }
     textAlign(CENTER, CENTER);
     fill(0);
-    text(dataTable.getColumnTitle(0),20,yval+55); 
+    text(dataTable.getColumnTitle(0),initx+20,yval+55); 
   } 
 }
