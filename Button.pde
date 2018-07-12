@@ -1,3 +1,4 @@
+// Button is used in the menu
 class Button{
   PVector pos;
   color backcol, labelcolor, mousecolor, selcolor;
@@ -19,22 +20,24 @@ class Button{
     this.labelcolor = controlColors[1];
     this.mousecolor = controlColors[2];
     this.selcolor = controlColors[3];
- }
-   
+  }
+  
+  // display the button  
   void display() {
     fill(color(this.backcol));
     
     noStroke();
-    rect(pos.x, pos.y, bw, bh, 7); //round border
+    rect(this.pos.x, this.pos.y, this.bw, this.bh, 7); //round border
     
     fill(color(this.labelcolor));
-    float wlabel= textWidth(label);
+    float wlabel= textWidth(this.label);
     textAlign(LEFT,CENTER);
-    text(label, pos.x+(bw-wlabel)/2, pos.y+15);       
+    text(this.label, this.pos.x+(this.bw-wlabel)/2, this.pos.y+15);       
   }
 
+  // function to determine if the button is selected
   boolean isSelected() {
-    if (mouseX > pos.x && mouseX < pos.x + bw && mouseY > pos.y && mouseY < pos.y + bh ) 
+    if (mouseX > this.pos.x && mouseX < this.pos.x + bw && mouseY > this.pos.y && mouseY < this.pos.y + bh ) 
       return true;
     else return false;
   }

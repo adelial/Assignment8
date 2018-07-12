@@ -1,11 +1,13 @@
-// Menu for selection
+// Menu for selection use button class
+// it can be display horizontal or vertical 
 class Menu {
   float posx, posy;
   String[] ctrlabels;
   color[] ctrcolors;
   float ctrh, ctrw;
   Button[] controls;
-  int keeper;
+  int keeper=1;
+
   
   Menu(){
   }
@@ -25,6 +27,7 @@ class Menu {
    controls = new Button[ctrlabels.length];
   }
   
+  // build function - display the menu in the defined x,y position and orientation (horizontal = true)
   void build(float posx, float posy, boolean horizontal){
     PVector ctrpos;
     this.posx = posx;
@@ -42,9 +45,9 @@ class Menu {
         posy = posy+ctrh;
       }
     }
-   // selectedButton();
-  }
+  } // build
   
+  // Function used to identified the selected button
   void selectedButton() {
     String optionSelected="";
     
@@ -63,56 +66,50 @@ class Menu {
     }
     fill(255);
     switch(optionSelected) {
-          case ("AGES"):
-            AgeGraph.loadData("SquadsGroupAge.csv");
-            //AgeGraph.displayAll(70,600, color(#CDFACC), color(#2B8BDE));
-            AgeGraph.displayAll(70,600, color(#BB0104, 70), color(#2B8BDE));
+          case ("AGES"):   // Player Ages graph and table
             keeper = 1;
             break;
           case ("GOALS"):
-            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
-            drawGoalTime();
             keeper = 2;
             break;
           case ("MARKET"):
-            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
-            marketValue.mvDraw(cName, barData);
             keeper = 3;
             break;
           case ("CARDS"):
-            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh);
-            lineCount = 0;
-            cardsDrawn = 0;
-            card.cardDraw(205, 4, 20, 40, 38);
             keeper = 4;
           default:
             keeper = 1;
             fill(0);
     }    
-  }
-  void keepButton(){
+  } // selectedButton
+  
+  // Keep the selection of the button
+  void keepButton(){   
+    // keep selected button 
+    controls[keeper-1].backcol = btncolors[3];
+    controls[keeper-1].display();
     switch(keeper) {
-          case (1):
+          case (1):  // Player Ages graph and table
             AgeGraph.loadData("SquadsGroupAge.csv");
-            AgeGraph.displayAll(70,600, color(#BB0104, 70), color(#2B8BDE));
+            AgeGraph.displayAll(70,610, color(#BB0104, 70), color(#2B8BDE));
+            table1 = loadTable("SquadsGroupAge.csv", "header");
+            buildTable.drawTable(20,760, table1, false);
             keeper = 1;
             break;
-          case (2):
-            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
+          case (2):  // Goal Time graph
             drawGoalTime();
             keeper = 2;
             break;
-          case (3):
-            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh); 
+          case (3):  // Market value graph
             marketValue.mvDraw(cName, barData);
             keeper = 3;
             break;
           case (4):
-            //rect(0, this.posy+ctrh, width-this.posx, height-this.posy-ctrh);
             lineCount = 0;
             cardsDrawn = 0;
             card.cardDraw(205, 4, 20, 40, 38);
             keeper = 4;
+            break;
           default:
             keeper = 1;
             fill(0);

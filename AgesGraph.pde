@@ -11,6 +11,7 @@ class CirclesGraph {
 
   CirclesGraph(){
   }
+  
   CirclesGraph(float posx, float posy, Table dataTable, color backColor, color circleColor){
     this.posx = posx;
     this.posy = posy;
@@ -30,8 +31,8 @@ class CirclesGraph {
     for (int i = 0; i < dataTable.getRowCount(); i++) {
       TableRow row = dataTable.getRow(i);
       // d number of players with a specific Age
-      int d = row.getInt("counts");
-      String n = row.getString("Age");
+      int d = row.getInt(1);
+      String n = row.getString(0);
       // Make a Bubble object out of the data read
       bubbles[i] = new Bubble(d, n);
     }
@@ -52,5 +53,8 @@ class CirclesGraph {
     textAlign(CENTER, CENTER);
     fill(0);
     text(dataTable.getColumnTitle(0),initx+20,yval+55); 
+    
+    textSize(14);
+    text("Player ages in the World Cup 2018", width/2, yval-80);
   } 
 }

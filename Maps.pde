@@ -9,7 +9,7 @@ void wcMap(int xpos, int ypos, String file_name, int sizew, int sizeh) {
   // Read map data.
   geoMap = new GeoMap(xpos+10, ypos+10, sizew-20, sizeh-20, this);
   geoMap.readFile("world");
- // geoMap.writeAttributesAsTable(5);         // Display first 5 rows of attribute table in console for checking.
+
    
   tableData = loadTable(file_name);  // Read data
  
@@ -48,7 +48,7 @@ void wcMap(int xpos, int ypos, String file_name, int sizew, int sizeh) {
   textAlign(LEFT, TOP);
   text("Countries participation in World Cup Russia 2018", xpos+10, sizeh+ypos-15);
   
-  // Query the country at the mouse position.
+  // Query the country at the mouse position to display Country name
   int id = geoMap.getID(mouseX, mouseY);
   if (id != -1)
   {

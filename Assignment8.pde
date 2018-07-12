@@ -3,8 +3,8 @@
 // Assignment 8 - Mid-Term Data Viz Project   //
 // Names:  Alma Lopez and George Sturrock     //
 //********************************************//
-//ControlP5
-import controlP5.*;
+
+// Needed libraries
 import org.gicentre.geomap.*;
 import grafica.*; //Goal Distribution
 import org.gicentre.utils.stat.*; //Market Value
@@ -14,19 +14,16 @@ GPlot plot;
 BarChart barChart;
 MarketValue marketValue;
 Cards card;
-
-DataTable buildTable;
 Menu optionMenu;
-ControlP5 cp5;
-
 CirclesGraph AgeGraph;
+DataTable buildTable;
+
 PImage header, bg; 
 
-//wcMap worldCMap;
-
-Table table1, table2;
+Table table1;
 color[] btncolors = new color[4];
 String labels[] = {"AGES", "GOALS", "MARKET", "CARDS"}; 
+
 //Market Value
 float[] barData = new float[10];
 String[] cName = new String[10];
@@ -38,19 +35,15 @@ void setup(){
   bg = loadImage("fifa2018bg (2).jpg");
   background(bg);
   header = loadImage("longfifa.jpg");  //header graphic
-
   
-  image(header,width/2-header.width/2,0);
   geoMap = new GeoMap(this);  // Create the geoMap object.
-  //btncolors[0] = color(#19C1BD);  // brackground
   btncolors[0] = color(#2B8BDE);  // brackground - Russian Flag Blue
   btncolors[1] = color(0);  // label
   btncolors[2] = color(#D5F5F4);  // mouseover
   btncolors[3] = color(#109D0E);  // selected
   
-  buildTable = new DataTable();
+  // Create optionMenu 
   optionMenu = new Menu(labels, 30, 100, btncolors);
-  //optionMenu.build(10, 470, true);
 
   card = new Cards(); 
   
@@ -62,33 +55,33 @@ void setup(){
   barData = marketValue.getMV();
   cName = marketValue.getCountry();
   
+  // Age player graph
   AgeGraph = new CirclesGraph();
+  buildTable = new DataTable();
   goalTime();
-   // buildTable.drawTable(700,560, table1);
+   
 }
 
 void draw(){
+  
   background(bg);
   image(header,width/2-header.width/2,0);
+  
+  // map of all the countries participating in Worl Cup 2018
   wcMap(20, 60, "Country_rounds.csv", 960, 400); 
   
+  // Display the menu - bottons in horizontal order
   optionMenu.build(300, 480, true);
   
-  if (mousePressed && mouseButton == LEFT){
+  if (mouseX > 300 && mouseX <700 && mouseY > 480 && mouseY<520 && mousePressed && mouseButton == LEFT){
     optionMenu.selectedButton();
   }
   else {
     optionMenu.keepButton();
   }
-  
-  //AgeGraph = new CirclesGraph();
-  //AgeGraph.displayAll(10, 600, color(#B5E5B5), color(#9396F7));
-  
+   
 }
 
-//void mousePressed(){
-//  optionMenu.selectedButton();
-//}
 
  
 
