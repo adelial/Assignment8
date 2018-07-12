@@ -45,6 +45,5 @@ class MarketValue {
     text("Top 10 - in Millions of Euros", width/2.1, height/1.8);
     float textHeight = textAscent();
 
-  }
-  
+  }  
 }

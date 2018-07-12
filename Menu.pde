@@ -7,8 +7,7 @@ class Menu {
   float ctrh, ctrw;
   Button[] controls;
   int keeper=1;
-
-  
+ 
   Menu(){
   }
   
@@ -75,8 +74,9 @@ class Menu {
           case ("MARKET"):
             keeper = 3;
             break;
-          case ("CARDS"):
+          case ("TIME"):
             keeper = 4;
+            break;
           default:
             keeper = 1;
             fill(0);
@@ -105,9 +105,10 @@ class Menu {
             keeper = 3;
             break;
           case (4):
-            lineCount = 0;
-            cardsDrawn = 0;
-            card.cardDraw(205, 4, 20, 40, 38);
+            text("How is World Cup Game Time Allocated?", 400, 530);
+            gTreeMap = loadImage("gameTMap.png");
+            gTreeMap.resize(880, 440);
+            image(gTreeMap, 60, 540);
             keeper = 4;
             break;
           default:
