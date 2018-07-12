@@ -8,22 +8,24 @@
 import org.gicentre.geomap.*;
 import grafica.*; //Goal Distribution
 import org.gicentre.utils.stat.*; //Market Value
+import org.gicentre.treemappa.*;      // For treemappa classes
+import org.gicentre.utils.colour.*;   // Colours needed by treemappa.
 
+//Class Declarations
 GeoMap geoMap; 
 GPlot plot;
 BarChart barChart;
 MarketValue marketValue;
-Cards card;
 Menu optionMenu;
 CirclesGraph AgeGraph;
 DataTable buildTable;
+PTreeMappa pTreeMappa;
+TreeMapPanel tmPanel;
 
-PImage header, bg; 
-
+PImage header, bg, gTreeMap; 
 Table table1;
 color[] btncolors = new color[4];
-String labels[] = {"AGES", "GOALS", "MARKET", "CARDS"}; 
-
+String labels[] = {"AGES", "GOALS", "MARKET", "TIME"}; 
 //Market Value
 float[] barData = new float[10];
 String[] cName = new String[10];
@@ -45,8 +47,6 @@ void setup(){
   // Create optionMenu 
   optionMenu = new Menu(labels, 30, 100, btncolors);
 
-  card = new Cards(); 
-  
   //Market Value
   marketValue = new MarketValue();
   barChart = new BarChart(this);
@@ -58,7 +58,9 @@ void setup(){
   // Age player graph
   AgeGraph = new CirclesGraph();
   buildTable = new DataTable();
+
   goalTime();
+  drawGameTreeMap();
    
 }
 
@@ -81,8 +83,3 @@ void draw(){
   }
    
 }
-
-
- 
-
-  
